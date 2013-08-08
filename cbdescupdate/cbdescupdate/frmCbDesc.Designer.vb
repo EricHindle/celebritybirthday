@@ -36,6 +36,7 @@ Partial Class frmCbDesc
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown
         Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown
         Me.txtUrl = New System.Windows.Forms.TextBox
+        Me.Label1 = New System.Windows.Forms.Label
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -43,14 +44,18 @@ Partial Class frmCbDesc
         '
         'RichTextBox1
         '
+        Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 447)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(562, 108)
+        Me.RichTextBox1.Size = New System.Drawing.Size(849, 108)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Button1.Location = New System.Drawing.Point(495, 570)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(81, 31)
@@ -60,7 +65,8 @@ Partial Class frmCbDesc
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 570)
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Location = New System.Drawing.Point(98, 322)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(81, 31)
         Me.Button2.TabIndex = 2
@@ -103,7 +109,7 @@ Partial Class frmCbDesc
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(387, 28)
+        Me.Button3.Location = New System.Drawing.Point(353, 30)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(81, 31)
         Me.Button3.TabIndex = 7
@@ -120,10 +126,12 @@ Partial Class frmCbDesc
         '
         'WebBrowser1
         '
+        Me.WebBrowser1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.WebBrowser1.Location = New System.Drawing.Point(96, 105)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(765, 263)
+        Me.WebBrowser1.Size = New System.Drawing.Size(765, 163)
         Me.WebBrowser1.TabIndex = 9
         '
         'NumericUpDown1
@@ -158,16 +166,26 @@ Partial Class frmCbDesc
         '
         'txtUrl
         '
-        Me.txtUrl.Location = New System.Drawing.Point(495, 36)
+        Me.txtUrl.Location = New System.Drawing.Point(451, 34)
         Me.txtUrl.Name = "txtUrl"
         Me.txtUrl.Size = New System.Drawing.Size(366, 20)
         Me.txtUrl.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(98, 284)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(600, 23)
+        Me.Label1.TabIndex = 14
         '
         'frmCbDesc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(873, 613)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtUrl)
         Me.Controls.Add(Me.NumericUpDown3)
         Me.Controls.Add(Me.NumericUpDown2)
@@ -205,5 +223,6 @@ Partial Class frmCbDesc
     Friend WithEvents NumericUpDown2 As System.Windows.Forms.NumericUpDown
     Friend WithEvents NumericUpDown3 As System.Windows.Forms.NumericUpDown
     Friend WithEvents txtUrl As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 
 End Class
