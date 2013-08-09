@@ -31,7 +31,6 @@ Partial Class frmCbDesc
         Me.ComboBox2 = New System.Windows.Forms.ComboBox
         Me.Button3 = New System.Windows.Forms.Button
         Me.ComboBox3 = New System.Windows.Forms.ComboBox
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown
         Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown
@@ -47,16 +46,17 @@ Partial Class frmCbDesc
         Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.Location = New System.Drawing.Point(12, 447)
+        Me.RichTextBox1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox1.Location = New System.Drawing.Point(11, 333)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(849, 108)
+        Me.RichTextBox1.Size = New System.Drawing.Size(513, 100)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
         'Button1
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(495, 570)
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(434, 439)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(81, 31)
         Me.Button1.TabIndex = 1
@@ -65,8 +65,7 @@ Partial Class frmCbDesc
         '
         'Button2
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(98, 322)
+        Me.Button2.Location = New System.Drawing.Point(19, 212)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(81, 31)
         Me.Button2.TabIndex = 2
@@ -75,14 +74,14 @@ Partial Class frmCbDesc
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(98, 374)
+        Me.txtTitle.Location = New System.Drawing.Point(19, 262)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(478, 20)
         Me.txtTitle.TabIndex = 3
         '
         'txtCaption
         '
-        Me.txtCaption.Location = New System.Drawing.Point(98, 411)
+        Me.txtCaption.Location = New System.Drawing.Point(19, 298)
         Me.txtCaption.Name = "txtCaption"
         Me.txtCaption.Size = New System.Drawing.Size(478, 20)
         Me.txtCaption.TabIndex = 4
@@ -109,7 +108,7 @@ Partial Class frmCbDesc
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(353, 30)
+        Me.Button3.Location = New System.Drawing.Point(395, 28)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(81, 31)
         Me.Button3.TabIndex = 7
@@ -119,24 +118,14 @@ Partial Class frmCbDesc
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(96, 77)
+        Me.ComboBox3.Location = New System.Drawing.Point(19, 173)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(478, 21)
         Me.ComboBox3.TabIndex = 8
         '
-        'WebBrowser1
-        '
-        Me.WebBrowser1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WebBrowser1.Location = New System.Drawing.Point(96, 105)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(765, 163)
-        Me.WebBrowser1.TabIndex = 9
-        '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(19, 78)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(19, 62)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
@@ -146,7 +135,7 @@ Partial Class frmCbDesc
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(19, 105)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(103, 62)
         Me.NumericUpDown2.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
         Me.NumericUpDown2.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown2.Name = "NumericUpDown2"
@@ -156,7 +145,7 @@ Partial Class frmCbDesc
         '
         'NumericUpDown3
         '
-        Me.NumericUpDown3.Location = New System.Drawing.Point(19, 131)
+        Me.NumericUpDown3.Location = New System.Drawing.Point(194, 62)
         Me.NumericUpDown3.Maximum = New Decimal(New Integer() {2015, 0, 0, 0})
         Me.NumericUpDown3.Minimum = New Decimal(New Integer() {2010, 0, 0, 0})
         Me.NumericUpDown3.Name = "NumericUpDown3"
@@ -166,31 +155,34 @@ Partial Class frmCbDesc
         '
         'txtUrl
         '
-        Me.txtUrl.Location = New System.Drawing.Point(451, 34)
+        Me.txtUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtUrl.Location = New System.Drawing.Point(19, 97)
         Me.txtUrl.Name = "txtUrl"
-        Me.txtUrl.Size = New System.Drawing.Size(366, 20)
+        Me.txtUrl.Size = New System.Drawing.Size(505, 20)
         Me.txtUrl.TabIndex = 13
         '
         'Label1
         '
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(98, 284)
+        Me.Label1.Location = New System.Drawing.Point(19, 132)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(600, 23)
+        Me.Label1.Size = New System.Drawing.Size(505, 23)
         Me.Label1.TabIndex = 14
         '
         'frmCbDesc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(873, 613)
+        Me.ClientSize = New System.Drawing.Size(537, 482)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtUrl)
         Me.Controls.Add(Me.NumericUpDown3)
         Me.Controls.Add(Me.NumericUpDown2)
         Me.Controls.Add(Me.NumericUpDown1)
-        Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.ComboBox3)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.ComboBox2)
@@ -218,7 +210,6 @@ Partial Class frmCbDesc
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents WebBrowser1 As System.Windows.Forms.WebBrowser
     Friend WithEvents NumericUpDown1 As System.Windows.Forms.NumericUpDown
     Friend WithEvents NumericUpDown2 As System.Windows.Forms.NumericUpDown
     Friend WithEvents NumericUpDown3 As System.Windows.Forms.NumericUpDown
