@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports InetCtlsObjects
+
 Imports System.Net
 
 Public Class frmImageStore
