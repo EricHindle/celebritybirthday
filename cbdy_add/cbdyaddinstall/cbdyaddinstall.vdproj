@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2164A9E0CC6414E7935D041CE717CB67"
-        "OwnerKey" = "8:_508215D00ECC43578073AC9F550AAA17"
+        "MsmKey" = "8:_508215D00ECC43578073AC9F550AAA17"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_508215D00ECC43578073AC9F550AAA17"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_694B0B9DEFB7CFE8399D35A17C79643F"
+        "OwnerKey" = "8:_508215D00ECC43578073AC9F550AAA17"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2164A9E0CC6414E7935D041CE717CB67"
+        "OwnerKey" = "8:_694B0B9DEFB7CFE8399D35A17C79643F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -148,14 +148,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2164A9E0CC6414E7935D041CE717CB67"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_694B0B9DEFB7CFE8399D35A17C79643F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Interop.InetCtlsObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2164A9E0CC6414E7935D041CE717CB67"
+                    "_694B0B9DEFB7CFE8399D35A17C79643F"
                     {
                     "Name" = "8:Interop.InetCtlsObjects.dll"
                     "Attributes" = "3:512"
@@ -277,14 +277,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CelebrityBirthdayDatabase"
-        "ProductCode" = "8:{5D717729-B783-48F1-BD03-AA3B4A2D4B5B}"
-        "PackageCode" = "8:{5B62DC17-BDC0-40C0-A3F8-0578DCD7FD91}"
+        "ProductCode" = "8:{B6B5E0B5-3B22-4C18-9CAF-AEE1CEE3BCA4}"
+        "PackageCode" = "8:{C5485DA8-81AF-45F5-ADC8-D69F91707AB2}"
         "UpgradeCode" = "8:{81059684-9A6E-4A4D-82CF-74F2D1553011}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.4.6"
+        "ProductVersion" = "8:1.4.8"
         "Manufacturer" = "8:netWYrks"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

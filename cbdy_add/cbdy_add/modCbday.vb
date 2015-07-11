@@ -12,7 +12,7 @@ Module modCbday
 
             For ich As Integer = 0 To stFormD.Length - 1
                 Dim uc As UnicodeCategory = CharUnicodeInfo.GetUnicodeCategory(stFormD(ich))
-                If uc <> UnicodeCategory.NonSpacingMark Then
+                If uc <> UnicodeCategory.NonSpacingMark And uc <> UnicodeCategory.OtherPunctuation Then
                     If Lookup.ContainsKey(stFormD(ich)) Then
                         sb.Append(Lookup(stFormD(ich)))
                     Else

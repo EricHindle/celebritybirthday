@@ -22,6 +22,7 @@ Partial Class frmCbDesc
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCbDesc))
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
@@ -36,6 +37,14 @@ Partial Class frmCbDesc
         Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown
         Me.txtUrl = New System.Windows.Forms.TextBox
         Me.Label1 = New System.Windows.Forms.Label
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox
+        Me.btnUpdateDesc = New System.Windows.Forms.Button
+        Me.txtPersonId = New System.Windows.Forms.TextBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.cbAutoUpdate = New System.Windows.Forms.CheckBox
+        Me.cbForename = New System.Windows.Forms.CheckBox
+        Me.cbSurname = New System.Windows.Forms.CheckBox
+        Me.Button4 = New System.Windows.Forms.Button
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,14 +58,14 @@ Partial Class frmCbDesc
         Me.RichTextBox1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox1.Location = New System.Drawing.Point(11, 333)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(513, 100)
+        Me.RichTextBox1.Size = New System.Drawing.Size(531, 65)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(434, 439)
+        Me.Button1.Location = New System.Drawing.Point(29, 456)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(81, 31)
         Me.Button1.TabIndex = 1
@@ -74,14 +83,14 @@ Partial Class frmCbDesc
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(19, 262)
+        Me.txtTitle.Location = New System.Drawing.Point(17, 281)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(478, 20)
         Me.txtTitle.TabIndex = 3
         '
         'txtCaption
         '
-        Me.txtCaption.Location = New System.Drawing.Point(19, 298)
+        Me.txtCaption.Location = New System.Drawing.Point(17, 307)
         Me.txtCaption.Name = "txtCaption"
         Me.txtCaption.Size = New System.Drawing.Size(478, 20)
         Me.txtCaption.TabIndex = 4
@@ -159,7 +168,7 @@ Partial Class frmCbDesc
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtUrl.Location = New System.Drawing.Point(19, 97)
         Me.txtUrl.Name = "txtUrl"
-        Me.txtUrl.Size = New System.Drawing.Size(505, 20)
+        Me.txtUrl.Size = New System.Drawing.Size(523, 20)
         Me.txtUrl.TabIndex = 13
         '
         'Label1
@@ -170,15 +179,102 @@ Partial Class frmCbDesc
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(19, 132)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(505, 23)
+        Me.Label1.Size = New System.Drawing.Size(523, 23)
         Me.Label1.TabIndex = 14
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RichTextBox2.Location = New System.Drawing.Point(11, 404)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.Size = New System.Drawing.Size(455, 46)
+        Me.RichTextBox2.TabIndex = 15
+        Me.RichTextBox2.Text = ""
+        '
+        'btnUpdateDesc
+        '
+        Me.btnUpdateDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateDesc.Location = New System.Drawing.Point(472, 404)
+        Me.btnUpdateDesc.Name = "btnUpdateDesc"
+        Me.btnUpdateDesc.Size = New System.Drawing.Size(70, 46)
+        Me.btnUpdateDesc.TabIndex = 16
+        Me.btnUpdateDesc.Text = "Update Description#"
+        Me.btnUpdateDesc.UseVisualStyleBackColor = True
+        '
+        'txtPersonId
+        '
+        Me.txtPersonId.Location = New System.Drawing.Point(395, 218)
+        Me.txtPersonId.Name = "txtPersonId"
+        Me.txtPersonId.Size = New System.Drawing.Size(100, 20)
+        Me.txtPersonId.TabIndex = 17
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(318, 221)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(52, 13)
+        Me.Label2.TabIndex = 18
+        Me.Label2.Text = "Person Id"
+        '
+        'cbAutoUpdate
+        '
+        Me.cbAutoUpdate.AutoSize = True
+        Me.cbAutoUpdate.Location = New System.Drawing.Point(480, 458)
+        Me.cbAutoUpdate.Name = "cbAutoUpdate"
+        Me.cbAutoUpdate.Size = New System.Drawing.Size(48, 17)
+        Me.cbAutoUpdate.TabIndex = 19
+        Me.cbAutoUpdate.Text = "Auto"
+        Me.cbAutoUpdate.UseVisualStyleBackColor = True
+        '
+        'cbForename
+        '
+        Me.cbForename.AutoSize = True
+        Me.cbForename.Checked = True
+        Me.cbForename.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbForename.Location = New System.Drawing.Point(117, 221)
+        Me.cbForename.Name = "cbForename"
+        Me.cbForename.Size = New System.Drawing.Size(73, 17)
+        Me.cbForename.TabIndex = 20
+        Me.cbForename.Text = "Forename"
+        Me.cbForename.UseVisualStyleBackColor = True
+        '
+        'cbSurname
+        '
+        Me.cbSurname.AutoSize = True
+        Me.cbSurname.Checked = True
+        Me.cbSurname.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbSurname.Location = New System.Drawing.Point(209, 220)
+        Me.cbSurname.Name = "cbSurname"
+        Me.cbSurname.Size = New System.Drawing.Size(68, 17)
+        Me.cbSurname.TabIndex = 21
+        Me.cbSurname.Text = "Surname"
+        Me.cbSurname.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(19, 244)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(81, 31)
+        Me.Button4.TabIndex = 22
+        Me.Button4.Text = "Update All"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmCbDesc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.ClientSize = New System.Drawing.Size(537, 482)
+        Me.ClientSize = New System.Drawing.Size(555, 499)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.cbSurname)
+        Me.Controls.Add(Me.cbForename)
+        Me.Controls.Add(Me.cbAutoUpdate)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.txtPersonId)
+        Me.Controls.Add(Me.btnUpdateDesc)
+        Me.Controls.Add(Me.RichTextBox2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtUrl)
         Me.Controls.Add(Me.NumericUpDown3)
@@ -193,6 +289,7 @@ Partial Class frmCbDesc
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.RichTextBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmCbDesc"
         Me.Text = "CB Description"
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -216,5 +313,13 @@ Partial Class frmCbDesc
     Friend WithEvents NumericUpDown3 As System.Windows.Forms.NumericUpDown
     Friend WithEvents txtUrl As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
+    Friend WithEvents btnUpdateDesc As System.Windows.Forms.Button
+    Friend WithEvents txtPersonId As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cbAutoUpdate As System.Windows.Forms.CheckBox
+    Friend WithEvents cbForename As System.Windows.Forms.CheckBox
+    Friend WithEvents cbSurname As System.Windows.Forms.CheckBox
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 
 End Class

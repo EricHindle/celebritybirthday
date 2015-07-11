@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "cbdescupdate", "cbdescupdate\cbdescupdate.vbproj", "{1BE5F00A-3D8E-4DCF-B969-0964B88C9C77}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "cbdescupdateinstall", "cbdescupdateinstall\cbdescupdateinstall.vdproj", "{8637C15A-47AE-4789-A150-60CF560E1180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 		{1BE5F00A-3D8E-4DCF-B969-0964B88C9C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BE5F00A-3D8E-4DCF-B969-0964B88C9C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BE5F00A-3D8E-4DCF-B969-0964B88C9C77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8637C15A-47AE-4789-A150-60CF560E1180}.Debug|Any CPU.ActiveCfg = Debug
+		{8637C15A-47AE-4789-A150-60CF560E1180}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

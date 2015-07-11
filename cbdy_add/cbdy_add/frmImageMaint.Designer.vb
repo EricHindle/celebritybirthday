@@ -53,6 +53,7 @@ Partial Class frmImageMaint
         Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.PersonName = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.btnClear = New System.Windows.Forms.Button
+        Me.txtLoadDay = New System.Windows.Forms.TextBox
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -81,7 +82,7 @@ Partial Class frmImageMaint
         'txtLoadMth
         '
         Me.txtLoadMth.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadMth.Location = New System.Drawing.Point(119, 148)
+        Me.txtLoadMth.Location = New System.Drawing.Point(200, 148)
         Me.txtLoadMth.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtLoadMth.Name = "txtLoadMth"
         Me.txtLoadMth.Size = New System.Drawing.Size(55, 22)
@@ -90,7 +91,7 @@ Partial Class frmImageMaint
         'txtLoadYr
         '
         Me.txtLoadYr.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoadYr.Location = New System.Drawing.Point(191, 148)
+        Me.txtLoadYr.Location = New System.Drawing.Point(278, 148)
         Me.txtLoadYr.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtLoadYr.Name = "txtLoadYr"
         Me.txtLoadYr.Size = New System.Drawing.Size(82, 22)
@@ -281,7 +282,7 @@ Partial Class frmImageMaint
         '
         'btnGetImages
         '
-        Me.btnGetImages.Location = New System.Drawing.Point(321, 142)
+        Me.btnGetImages.Location = New System.Drawing.Point(390, 142)
         Me.btnGetImages.Name = "btnGetImages"
         Me.btnGetImages.Size = New System.Drawing.Size(89, 33)
         Me.btnGetImages.TabIndex = 76
@@ -334,12 +335,20 @@ Partial Class frmImageMaint
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
+        'txtLoadDay
+        '
+        Me.txtLoadDay.Location = New System.Drawing.Point(119, 146)
+        Me.txtLoadDay.Name = "txtLoadDay"
+        Me.txtLoadDay.Size = New System.Drawing.Size(49, 24)
+        Me.txtLoadDay.TabIndex = 79
+        '
         'frmImageMaint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.OldLace
         Me.ClientSize = New System.Drawing.Size(721, 497)
+        Me.Controls.Add(Me.txtLoadDay)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.dgvPeople)
         Me.Controls.Add(Me.btnGetImages)
@@ -410,4 +419,5 @@ Partial Class frmImageMaint
     Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PersonName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnClear As System.Windows.Forms.Button
+    Friend WithEvents txtLoadDay As System.Windows.Forms.TextBox
 End Class

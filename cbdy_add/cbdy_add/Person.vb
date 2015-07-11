@@ -11,8 +11,48 @@
     Private _imagename As String
     Private _imagetype As String
     Private _ShortDesc As String
+    Private _birthPlace As String
+    Private _birthName As String
     Private _sortSeq As Integer
     Private _unsavedChanges As Boolean
+    Private _deathday As Integer
+    Private _deathMonth As Integer
+
+    Public Property DeathMonth() As Integer
+        Get
+            Return _deathMonth
+        End Get
+        Set(ByVal value As Integer)
+            _deathMonth = value
+        End Set
+    End Property
+
+    Public Property DeathDay() As Integer
+        Get
+            Return _deathday
+        End Get
+        Set(ByVal value As Integer)
+            _deathday = value
+        End Set
+    End Property
+
+    Public Property BirthPlace() As String
+        Get
+            Return _birthPlace
+        End Get
+        Set(ByVal value As String)
+            _birthPlace = value
+        End Set
+    End Property
+
+    Public Property BirthName() As String
+        Get
+            Return _birthName
+        End Get
+        Set(ByVal value As String)
+            _birthName = value
+        End Set
+    End Property
 
     Public Property unsavedChanges() As Boolean
         Get
@@ -68,8 +108,6 @@
             _imagename = value
         End Set
     End Property
-
-
 
     Public Property BirthDay() As Integer
         Get
@@ -147,9 +185,13 @@
         _imagename = ""
         _imagetype = ""
         _unsavedChanges = False
+        _deathMonth = 0
+        _deathday = 0
+        _birthName = ""
+        _birthPlace = ""
     End Sub
 
-    Public Sub New(ByVal pForename As String, ByVal pSurname As String, ByVal pDesc As String, ByVal pShortDesc As String, ByVal pDay As Integer, ByVal pMonth As Integer, ByVal pYear As String, ByVal pDeathYr As Integer, ByVal pImgName As String, ByVal pImgType As String)
+    Public Sub New(ByVal pForename As String, ByVal pSurname As String, ByVal pDesc As String, ByVal pShortDesc As String, ByVal pDay As Integer, ByVal pMonth As Integer, ByVal pYear As String, ByVal pDeathYr As Integer, ByVal pDeathMonth As Integer, ByVal pDeathDay As Integer, ByVal pBirthName As String, ByVal pBirthPlace As String, ByVal pImgName As String, ByVal pImgType As String)
         _id = -1
         _forename = pForename
         _surname = pSurname
@@ -163,7 +205,18 @@
         _deathYear = pDeathYr
         _imagename = pImgName
         _imagetype = pImgType
+
+        _deathMonth = pDeathMonth
+        _deathday = pDeathDay
+        _birthName = pBirthName
+        _birthPlace = pBirthPlace
+
         _unsavedChanges = False
+
+        If pForename = "" And pSurname = "" Then
+            MsgBox("Please supply a name", MsgBoxStyle.Exclamation, "Data error")
+        End If
+
     End Sub
     Public Sub New(ByVal pPerson As Person)
         _id = pPerson.Id
@@ -178,6 +231,11 @@
         _deathYear = pPerson.DeathYear
         _imagename = pPerson.ImageName
         _imagetype = pPerson.ImageType
+
+        _deathMonth = pPerson.DeathMonth
+        _deathday = pPerson.DeathDay
+        _birthName = pPerson.BirthName
+        _birthPlace = pPerson.BirthPlace
         _unsavedChanges = False
     End Sub
     Public ReadOnly Property iBirthYear() As Integer

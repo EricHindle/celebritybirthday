@@ -118,7 +118,7 @@ Partial Class frmSearchDb
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(859, 395)
+        Me.DataGridView1.Size = New System.Drawing.Size(859, 254)
         Me.DataGridView1.TabIndex = 1
         '
         'PersonName
@@ -236,7 +236,7 @@ Partial Class frmSearchDb
         Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(859, 226)
+        Me.WebBrowser1.Size = New System.Drawing.Size(859, 367)
         Me.WebBrowser1.TabIndex = 3
         '
         'SplitContainer1
@@ -257,7 +257,7 @@ Partial Class frmSearchDb
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.WebBrowser1)
         Me.SplitContainer1.Size = New System.Drawing.Size(863, 633)
-        Me.SplitContainer1.SplitterDistance = 399
+        Me.SplitContainer1.SplitterDistance = 258
         Me.SplitContainer1.TabIndex = 4
         '
         'txtURL

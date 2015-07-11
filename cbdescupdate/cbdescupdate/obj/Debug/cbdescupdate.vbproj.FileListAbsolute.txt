@@ -1,0 +1,11 @@
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\bin\Debug\cbdescupdate.exe
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\bin\Debug\cbdescupdate.pdb
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\bin\Debug\cbdescupdate.xml
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\ResolveAssemblyReference.cache
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.frmCbDesc.resources
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.Resources.resources
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.vbproj.GenerateResource.Cache
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.exe
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.xml
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\obj\Debug\cbdescupdate.pdb
+E:\GitHub\celebritybirthday\cbdescupdate\cbdescupdate\bin\Debug\cbdescupdate.exe.config

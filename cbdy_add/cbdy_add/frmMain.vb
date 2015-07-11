@@ -8,8 +8,8 @@ Public Class frmMain
     Dim aTagStart As String = "<a href=""http://celebritybirthday.files.wordpress.com/"
     Dim aTagEnd As String = """>"
     Dim imgTagStart As String = "<img title="""
-    Dim imgTagMiddle As String = """ alt="""" src=""http://celebritybirthday.files.wordpress.com/"
-    Dim imgTagEnd As String = """ width=""60"" height=""60"" />"
+    Dim imgTagMiddle As String = """ src=""http://celebritybirthday.files.wordpress.com/"
+    Dim imgTagEnd As String = """ alt="""" width=""60"" height=""60"" />"
     Dim strongTagStart As String = "</a> <strong>"
     Dim strongTagEnd As String = "</strong>"
     Dim excerptStart As String = "Today's Birthdays:<br />"
@@ -22,7 +22,10 @@ Public Class frmMain
     Dim mDialog1 As frmSearchDb = Nothing
     Dim oWebBrowser As frmWebImageSearch = Nothing
     Dim bLoadingPerson As Boolean = False
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Dim _search As frmSearchDb
+    Dim MouseIsDown As Boolean = False
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Dim resp As MsgBoxResult = MsgBoxResult.No
         If checkForChanges() Then
             resp = MsgBox("Save changes now?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Unsaved Changes")
@@ -38,7 +41,7 @@ Public Class frmMain
         End Select
     End Sub
 
-    Private Sub getUrlDate()
+    Private Sub getUrlDate(ByRef Id As Integer)
 
         If txtCurrentText.TextLength > 0 Then
             Dim currParts1 As String() = Split(txtCurrentText.Text, "<h3>")
@@ -52,38 +55,64 @@ Public Class frmMain
                 urlMonth = date1(2)
             End If
         Else
+
             urlYear = txtLoadYr.Text
             urlMonth = txtLoadMth.Text
+
+            getAlternateImageDate(urlYear, urlMonth, Id)
         End If
 
     End Sub
 
-    Private Sub txtCurrentExcerpt_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtCurrentExcerpt.DragDrop, _
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtCurrentExcerpt.DragDrop, _
                                                                                                                            txtCurrentText.DragDrop, _
                                                                                                                            txtDesc.DragDrop, _
                                                                                                                            txtDied.DragDrop, _
                                                                                                                            txtName.DragDrop, _
                                                                                                                            txtYear.DragDrop, _
                                                                                                                            txtForename.DragDrop, _
-                                                                                                                           txtSurname.DragDrop
-        If (e.Data.GetDataPresent(GetType(System.String))) Then
+                                                                                                                           txtSurname.DragDrop, _
+                                                                                                                           txtBirthName.DragDrop, _
+                                                                                                                           txtBirthPlace.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
-            Dim item As Object = CType(e.Data.GetData(GetType(System.String)), System.Object)
-            oBox.Text = item
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            oBox.SelectedText = item
+
         End If
         getGalleryText()
     End Sub
 
-    Private Sub txtCurrentExcerpt_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtCurrentExcerpt.DragEnter, _
+    Private Sub TextBox_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtCurrentExcerpt.DragOver, _
+                                                                                                                           txtCurrentText.DragOver, _
+                                                                                                                           txtDesc.DragOver, _
+                                                                                                                           txtDied.DragOver, _
+                                                                                                                           txtName.DragOver, _
+                                                                                                                           txtYear.DragOver, _
+                                                                                                                           txtForename.DragOver, _
+                                                                                                                           txtSurname.DragOver, _
+                                                                                                                           txtBirthName.DragOver, _
+                                                                                                                           txtBirthPlace.DragOver
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            oBox.Select(TextBoxCursorPos(oBox, e.X, e.Y), 0)
+        End If
+    End Sub
+
+    Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles txtCurrentExcerpt.DragEnter, _
                                                                                                                            txtCurrentText.DragEnter, _
                                                                                                                            txtDesc.DragEnter, _
                                                                                                                            txtDied.DragEnter, _
                                                                                                                            txtName.DragEnter, _
                                                                                                                            txtYear.DragEnter, _
                                                                                                                            txtForename.DragEnter, _
-                                                                                                                           txtSurname.DragEnter
-        If (e.Data.GetDataPresent(GetType(System.String))) Then
+                                                                                                                           txtSurname.DragEnter, _
+                                                                                                                           txtBirthName.DragEnter, _
+                                                                                                                           txtBirthPlace.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
+        Else
+            e.Effect = DragDropEffects.None
         End If
     End Sub
 
@@ -143,7 +172,7 @@ Public Class frmMain
                         sDeathYear = 0
                     End Try
                     Dim sShortDesc As String = Split(sDesc, ".")(0) & "."
-                    Dim oPerson As Person = New Person(sForename, sSurname, sDesc, sShortDesc, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, sYr, sDeathYear, simgName, sImgType)
+                    Dim oPerson As Person = New Person(sForename, sSurname, sDesc, sShortDesc, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1, sYr, sDeathYear, 0, 0, "", "", simgName, sImgType)
 
                     personTable.Add(oPerson)
                 Next
@@ -194,13 +223,17 @@ Public Class frmMain
         txtSurname.Text = ""
         txtYear.Text = ""
         txtImgName.Text = ""
-        txtImgType.Text = ".jpg"
+        cbImgType.SelectedIndex = 0
         PictureBox1.ImageLocation = ""
         PictureBox2.ImageLocation = ""
-
+        txtBirthName.Text = ""
+        txtBirthPlace.Text = ""
+        txtDthDay.Text = ""
+        txtDthMth.Text = ""
     End Sub
 
     Private Sub btnInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsert.Click
+        tidyText()
         If cboDay.SelectedIndex >= 0 And cboMonth.SelectedIndex >= 0 Then
             Try
                 Dim newPerson As New Person(txtForename.Text.Trim, _
@@ -211,7 +244,11 @@ Public Class frmMain
                                             cboMonth.SelectedIndex + 1, _
                                             txtYear.Text.Trim, _
                                             CInt("0" & txtDied.Text.Trim), _
-                                            txtImgName.Text, txtImgType.Text)
+                                            CInt("0" & txtDthMth.Text.Trim), _
+                                            CInt("0" & txtDthDay.Text.Trim), _
+                                            txtBirthName.Text.Trim, _
+                                            txtBirthPlace.Text.Trim, _
+                                            txtImgName.Text, cbImgType.Text)
                 newPerson.unsavedChanges = True
                 Dim bInserted As Boolean = False
                 For ix As Integer = 0 To personTable.Count - 1
@@ -222,10 +259,12 @@ Public Class frmMain
                         Exit For
                     End If
                 Next
+                Dim p As Integer = -1
                 If Not bInserted Then
-                    personTable.Add(newPerson)
+                    p = personTable.Add(newPerson)
                 End If
                 DisplayPersonlList()
+                lbPeople.SelectedIndex = p
             Catch ex As Exception
                 MsgBox("Error on insert", MsgBoxStyle.Exclamation, "Insert error")
                 lblStatus.Text = ex.Message
@@ -310,23 +349,24 @@ Public Class frmMain
 
     Private Sub btnGenFullText_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenFullText.Click
         Dim bOK As Boolean = True
-        If galleryText.Length = 0 Then
-            If MsgBox("No gallery text available." & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Generator Error") = MsgBoxResult.Yes Then
-                galleryText = "[gallery columns=""6"" size=""thumbnails"" ids=""""]" & vbCrLf & "<!--more-->" & vbCrLf
-            Else
-                bOK = False
-            End If
+        'If galleryText.Length = 0 Then
+        '    If MsgBox("No gallery text available." & vbCrLf & "OK to continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Generator Error") = MsgBoxResult.Yes Then
+        '        galleryText = "[gallery columns=""6"" size=""thumbnails"" ids=""""]" & vbCrLf & "<!--more-->" & vbCrLf
+        '    Else
+        '        bOK = False
+        '    End If
 
-        End If
+        'End If
         If lbPeople.Items.Count = 0 Then
             bOK = False
         End If
         If bOK Then
-            getUrlDate()
+
 
             Dim lastYear As String = ""
             Dim newText As New StringBuilder(galleryText)
             For Each oPerson As Person In personTable
+                getUrlDate(oPerson.Id)
                 If oPerson.BirthYear <> lastYear Then
                     newText.Append("<h3>").Append(oPerson.BirthYear).Append("</h3>").Append(vbCrLf)
                     lastYear = oPerson.BirthYear
@@ -334,6 +374,10 @@ Public Class frmMain
                 Dim lowername As String = oPerson.ImageName
                 If lowername.Length = 0 Then
                     lowername = oPerson.Name.ToLower.Replace(" ", "-").Replace(".", "")
+                End If
+                Dim sBorn As String = ""
+                If oPerson.BirthName.Length > 0 Or oPerson.BirthPlace.Length > 0 Then
+                    sBorn = " Born" & If(oPerson.BirthName.Length > 0, " " & oPerson.BirthName, "") & If(oPerson.BirthPlace.Length > 0, " in " & oPerson.BirthPlace, "") & "."
                 End If
                 Dim sDied As String = " (d. " & CStr(oPerson.DeathYear) & ")"
                 With newText
@@ -359,7 +403,8 @@ Public Class frmMain
                     .Append(oPerson.Name)
                     .Append(strongTagEnd)
                     .Append(vbCrLf)
-                    .Append(oPerson.ShortDesc)
+                    .Append(oPerson.Description)
+                    .Append(sborn)
                     .Append(If(oPerson.DeathYear = 0, "", sDied))
                     .Append(vbCrLf)
                 End With
@@ -435,11 +480,12 @@ Public Class frmMain
                 lastYear = oPerson.BirthYear
             End If
             If oPerson.Id < 0 Then
-                oTa.InsertPerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
-                oPerson.ShortDesc, oPerson.Description, oPerson.ImageName, oPerson.ImageType, iSeq, Today.Date)
+                Dim newId As Integer = oTa.InsertPerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
+                oPerson.ShortDesc, oPerson.Description, iSeq, Today.Date, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay, oPerson.ImageName, oPerson.ImageType)
+                oPerson.Id = newId
             Else
                 oTa.UpdatePerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
-                 oPerson.ShortDesc, oPerson.Description, oPerson.ImageName, oPerson.ImageType, iSeq, oPerson.Id)
+                 oPerson.ShortDesc, oPerson.Description, iSeq, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay, oPerson.ImageName, oPerson.ImageType, oPerson.Id)
             End If
             oPerson.unsavedChanges = False
         Next
@@ -470,14 +516,23 @@ Public Class frmMain
             lbPeople.Items.Clear()
             Dim sYear As String = ""
             Dim sMonth As String = ""
+            Dim sDay As String = ""
+
             Dim oDta As New CelebrityBirthdayDataSetTableAdapters.DatesTableAdapter
             Dim oDtable As New CelebrityBirthdayDataSet.DatesDataTable
             Dim iCt As Integer = oDta.FillByDate(oDtable, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
             Dim bAmended As Boolean = False
             If iCt = 1 Then
                 Dim oDrow As CelebrityBirthdayDataSet.DatesRow = oDtable.Rows(0)
-                sYear = oDrow.uploadyear
-                sMonth = oDrow.uploadmonth
+                If oDrow.IsuploadyearNull = False Then
+                    sYear = oDrow.uploadyear
+                End If
+                If oDrow.IsuploadmonthNull = False Then
+                    sMonth = oDrow.uploadmonth
+                End If
+                If oDrow.IsuploaddayNull = False Then
+                    sDay = oDrow.uploadday
+                End If
                 bAmended = oDrow.amended
             End If
             oDta.Dispose()
@@ -486,6 +541,7 @@ Public Class frmMain
             oDtable = Nothing
             txtLoadMth.Text = sMonth
             txtLoadYr.Text = sYear
+            txtLoadDay.Text = sDay
             cbDateAmend.Checked = bAmended
             Dim oTa As New CelebrityBirthdayDataSetTableAdapters.PersonTableAdapter
             Dim oTable As New CelebrityBirthdayDataSet.PersonDataTable
@@ -539,8 +595,16 @@ Public Class frmMain
         oPerson.BirthMonth = oRow.birthmonth
         oPerson.BirthYear = oRow.birthyear
         oPerson.DeathYear = oRow.deathyear
-        oPerson.ImageName = oRow.imgfilename
-        oPerson.ImageType = oRow.imgfiletype
+        oPerson.DeathMonth = oRow.deathmonth
+        oPerson.DeathDay = oRow.deathday
+        oPerson.BirthPlace = oRow.birthplace
+        oPerson.BirthName = oRow.birthname
+        If Not oRow.IsimgfilenameNull Then
+            oPerson.ImageName = oRow.imgfilename
+        End If
+        If Not oRow.IsimgfiletypeNull Then
+            oPerson.ImageType = oRow.imgfiletype
+        End If
         oPerson.Sortseq = oRow.sortseq
         Return oPerson
     End Function
@@ -557,11 +621,17 @@ Public Class frmMain
             txtShortDesc.Text = oPerson.ShortDesc
             txtYear.Text = CStr(oPerson.BirthYear)
             txtDied.Text = CStr(oPerson.DeathYear)
+            txtDthDay.Text = oPerson.DeathDay
+            txtDthMth.Text = oPerson.DeathMonth
             txtImgName.Text = oPerson.ImageName
-            txtImgType.Text = oPerson.ImageType
+            cbImgType.SelectedIndex = cbImgType.FindString(oPerson.ImageType)
+            txtBirthName.Text = oPerson.BirthName
+            txtBirthPlace.Text = oPerson.BirthPlace
+
             txtName.Text = Trim(oPerson.ForeName & " " & oPerson.Surname)
             Dim sYear As String = txtLoadYr.Text
             Dim sMth As String = txtLoadMth.Text
+            getAlternateImageDate(sYear, sMth, oPerson.Id)
             Try
                 Dim sSimplename As String = ToSimpleCharacters(Trim(oPerson.ForeName & " " & oPerson.Surname))
                 Dim fName1 As String = Path.Combine(My.Settings.ImgFolder, sSimplename & oPerson.ImageType)
@@ -593,6 +663,28 @@ Public Class frmMain
         bLoadingPerson = False
     End Sub
 
+    Private Sub getAlternateImageDate(ByRef sYear As String, ByRef sMonth As String, ByVal Id As Integer)
+
+        Dim oIta As New CelebrityBirthdayDataSetTableAdapters.ImageTableAdapter
+        Dim oITable As New CelebrityBirthdayDataSet.ImageDataTable
+
+        Dim ict As Integer = oIta.FillById(oITable, Id)
+        If ict = 1 Then
+            Dim oIRow As CelebrityBirthdayDataSet.ImageRow = oITable.Rows(0)
+
+            If oIRow.IsimgloadyrNull = False Then
+                sYear = oIRow.imgloadyr
+            End If
+            If oIRow.IsimgloadmonthNull = False Then
+                sMonth = oIRow.imgloadmonth
+            End If
+
+        End If
+
+        oITable.Dispose()
+        oIta.Dispose()
+    End Sub
+
     Private Sub btnUpdateSel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateSel.Click
         lblStatus.Text = ""
         If lbPeople.SelectedIndex >= 0 Then
@@ -603,11 +695,12 @@ Public Class frmMain
             Dim iSeq As Integer = 0
             Dim oPerson As Person = personTable(lbPeople.SelectedIndex)
             If oPerson.Id < 0 Then
-                oTa.InsertPerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
-                oPerson.ShortDesc, oPerson.Description, oPerson.ImageName, oPerson.ImageType, oPerson.Sortseq, Today.Date)
+                Dim newId As Integer = oTa.InsertPerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
+                oPerson.ShortDesc, oPerson.Description, iSeq, Today.Date, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay, oPerson.ImageName, oPerson.ImageType)
+                oPerson.Id = newId
             Else
                 oTa.UpdatePerson(oPerson.ForeName, oPerson.Surname, CInt(oPerson.BirthYear), oPerson.BirthMonth, oPerson.BirthDay, oPerson.DeathYear, _
-                 oPerson.ShortDesc, oPerson.Description, oPerson.ImageName, oPerson.ImageType, oPerson.Sortseq, oPerson.Id)
+                 oPerson.ShortDesc, oPerson.Description, iSeq, oPerson.BirthPlace, oPerson.BirthName, oPerson.DeathMonth, oPerson.DeathDay, oPerson.ImageName, oPerson.ImageType, oPerson.Id)
             End If
             If cbDateAmend.Checked Then
                 updateDate()
@@ -638,20 +731,27 @@ Public Class frmMain
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         lblStatus.Text = ""
+        tidyText()
         If lblID.Text.Length > 0 Then
             Dim id As Integer = CInt(lblID.Text)
             For Each oPerson As Person In personTable
                 If oPerson.Id = id Then
                     oPerson.BirthYear = txtYear.Text
-                    oPerson.DeathYear = txtDied.Text
-                    oPerson.Description = txtDesc.Text
-                    oPerson.ForeName = txtForename.Text
-                    oPerson.ImageName = txtImgName.Text
-                    oPerson.ImageType = txtImgType.Text
-                    oPerson.Surname = txtSurname.Text
-                    oPerson.ShortDesc = txtShortDesc.Text
+                    oPerson.DeathYear = CInt("0" & txtDied.Text)
+                    oPerson.Description = txtDesc.Text.Trim
+                    oPerson.ForeName = txtForename.Text.Trim
+                    oPerson.ImageName = txtImgName.Text.Trim
+                    oPerson.ImageType = cbImgType.Text
+                    oPerson.Surname = txtSurname.Text.Trim
+                    oPerson.ShortDesc = txtShortDesc.Text.Trim
+                    oPerson.DeathDay = CInt("0" & txtDthDay.Text.Trim)
+                    oPerson.DeathMonth = CInt("0" & txtDthMth.Text.Trim)
+                    oPerson.BirthPlace = txtBirthPlace.Text.Trim
+                    oPerson.BirthName = txtBirthName.Text.Trim
                     oPerson.unsavedChanges = True
+                    Dim p As Integer = lbPeople.SelectedIndex
                     DisplayPersonlList()
+                    lbPeople.SelectedIndex = p
                     lblStatus.Text = "Updated list"
 
                     Exit For
@@ -746,6 +846,9 @@ Public Class frmMain
     End Sub
 
     Private Sub frmAddCbdy_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If _search IsNot Nothing Then
+            _search.Close()
+        End If
         My.Settings.mainformpos = setFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -758,25 +861,26 @@ Public Class frmMain
         End If
         Label11.Text = "Version: " & My.Application.Info.Version.ToString
         getFormPos(Me, My.Settings.mainformpos)
-        txtLoadYr.Text = "2013"
-        txtLoadMth.Text = "03"
+        txtLoadYr.Text = ""
+        txtLoadMth.Text = ""
+        cbImgType.SelectedIndex = 0
         cbDateAmend.Checked = False
         bLoadingPerson = False
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        txtShortDesc.Text = Split(txtDesc.Text, ".")(0) & "."
+    Private Sub btnCreateShortDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateShortDesc.Click
+        txtShortDesc.Text = txtDesc.SelectedText
     End Sub
 
-    Public Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Public Sub btnSplitName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSplitName.Click
         txtName.Text = txtName.Text.Trim
         Dim names As String() = Split(txtName.Text, " ")
         txtSurname.Text = names(UBound(names))
         txtForename.Text = txtName.Text.Replace(txtSurname.Text, "").Trim
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        txtName.Text = txtForename.Text & " " & txtSurname.Text
+    Private Sub btnCreateFullName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateFullName.Click
+        txtName.Text = (txtForename.Text & " " & txtSurname.Text).Trim(" ")
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
@@ -797,7 +901,7 @@ Public Class frmMain
     Private Sub updateDate()
 
         Dim oTa As New CelebrityBirthdayDataSetTableAdapters.DatesTableAdapter
-        oTa.UpdateDate(txtLoadYr.Text, txtLoadMth.Text, cbDateAmend.Checked, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
+        oTa.UpdateDate(txtLoadYr.Text, txtLoadMth.Text, cbDateAmend.Checked, txtLoadDay.Text, cboDay.SelectedIndex + 1, cboMonth.SelectedIndex + 1)
         oTa.Dispose()
     End Sub
 
@@ -851,17 +955,203 @@ Public Class frmMain
         imgForm.Dispose()
     End Sub
 
+
     Private Sub txtYear_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtYear.TextChanged, txtDied.TextChanged, _
-                                                                                                txtImgName.TextChanged, txtImgType.TextChanged, _
+                                                                                                txtImgName.TextChanged, _
                                                                                                 txtForename.TextChanged, txtSurname.TextChanged, _
                                                                                                 txtName.TextChanged, txtDesc.TextChanged, _
-                                                                                                txtShortDesc.TextChanged
+                                                                                                txtShortDesc.TextChanged, txtBirthName.TextChanged, _
+                                                                                                txtBirthPlace.TextChanged, txtDthDay.TextChanged, _
+                                                                                                txtDthMth.TextChanged
         If Not bLoadingPerson Then
             cbDateAmend.Checked = True
         End If
     End Sub
 
-    Private Sub DescriptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DescriptionsToolStripMenuItem.Click
+    Private Const EM_CHARFROMPOS As Int32 = &HD7
+    Private Structure POINTAPI
+        Public X As Integer
+        Public Y As Integer
+    End Structure
+
+    Private Declare Function SendMessageLong Lib "user32" Alias _
+        "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As  _
+        Int32, ByVal wParam As Int32, ByVal lParam As Int32) As _
+        Long
+
+    ' Return the character position under the mouse.
+    Public Function TextBoxCursorPos(ByRef oBox As TextBox, _
+        ByVal X As Single, ByVal Y As Single) As Long
+        ' Convert screen coordinates into control coordinates.
+        Dim pt As Point = oBox.PointToClient(New Point(X, _
+            Y))
+
+        ' Get the character number
+        TextBoxCursorPos = SendMessageLong(oBox.Handle, _
+            EM_CHARFROMPOS, 0&, CLng(pt.X + pt.Y * &H10000)) _
+            And &HFFFF&
+    End Function
+
+    Private Sub btnSaveImgInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveImgInfo.Click
+        If txtCurrentText.TextLength > 0 Then
+
+            Dim oIta As New CelebrityBirthdayDataSetTableAdapters.ImageTableAdapter
+            Dim oITable As New CelebrityBirthdayDataSet.ImageDataTable
+            Dim sText As String = txtCurrentText.Text.Trim.Replace(vbCr, "").Replace(vbLf, "")
+            Dim currParts As String() = Split(sText, "<h3>")
+            For Each currPart As String In currParts
+                Dim entries As String() = Split(currPart, "<img")
+
+                For x = 1 To entries.Count - 1
+                    Dim imgsrcstart As Int16 = entries(x).IndexOf("src=") + 5
+                    Dim imgsrcend As Int16 = entries(x).IndexOf(" alt") - 1
+                    Dim url = entries(x).Substring(imgsrcstart, imgsrcend - imgsrcstart)
+                    Dim urlparts As String() = Split(url, "/")
+
+                    Dim filename As String() = Split(urlparts(urlparts.Count - 1), ".")
+                    Dim ldmth As String = urlparts(urlparts.Count - 2)
+                    Dim ldyr As String = urlparts(urlparts.Count - 3)
+                    Debug.Print(filename(0) & " " & filename(1) & " " & ldmth & " " & ldyr)
+
+                    Dim ict As Integer = oIta.FillByFilename(oITable, filename(0), "." & filename(1))
+                    If ict = 1 Then
+                        Dim oIRow As CelebrityBirthdayDataSet.ImageRow = oITable.Rows(0)
+                        oIta.UpdateImage(filename(0), "." & filename(1), ldyr, ldmth, Nothing, oIRow.id)
+                    End If
+                Next
+            Next
+            oITable.Dispose()
+            oIta.Dispose()
+        End If
+
+    End Sub
+
+    Private Sub btnWiki_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWiki.Click
+        Dim item As String() = {""}
+        If lblID.Text.Length > 0 And lbPeople.SelectedIndex >= 0 Then
+            item = Split(lbPeople.SelectedItem, " ")
+            item(0) = ""
+        Else
+            If txtName.TextLength > 0 Then
+                item = Split(txtName.Text, " ")
+            End If
+        End If
+        If _search Is Nothing Then
+            _search = New frmSearchDb
+        End If
+        _search.Show()
+        _search.searchName = Join(item, " ").Trim
+        _search.FindinWiki()
+
+    End Sub
+
+    Private Sub txtDthDay_click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDthDay.Click, txtDthMth.Click, txtDied.Click
+        Dim fld As TextBox = CType(sender, TextBox)
+        fld.SelectAll()
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
+        getSourceControl(menuItem).Copy()
+    End Sub
+
+    Private Sub CutToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles CutToolStripMenuItem.Click
+        getSourceControl(menuItem).Cut()
+    End Sub
+
+    Private Sub SelectAllToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectAllToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(sender)
+        If _textBox IsNot Nothing Then
+            _textBox.SelectAll()
+        End If
+    End Sub
+
+    Private Sub PasteToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles PasteToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(menuItem)
+        _textBox.SelectionStart = _textBox.SelectionStart + _textBox.SelectionLength
+        _textBox.Paste()
+    End Sub
+
+    Private Sub LowercaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles LowercaseToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(menuItem)
+        _textBox.SelectedText = _textBox.SelectedText.ToLower
+    End Sub
+
+    Private Sub UpperCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles UpperCaseToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(menuItem)
+        _textBox.SelectedText = _textBox.SelectedText.ToUpper
+    End Sub
+
+    Private Function getSourceControl(ByRef menuItem As Object) As TextBox
+        Dim _menuItem As ToolStripMenuItem = CType(menuItem, ToolStripMenuItem)
+        Dim menuStrip As ContextMenuStrip = CType(_menuItem.Owner, ContextMenuStrip)
+        Return menuStrip.SourceControl
+    End Function
+
+    Private Sub TitleCaseToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles TitleCaseToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(menuItem)
+        _textBox.SelectedText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
+    End Sub
+
+
+    Private Sub ClearToolStripMenuItem_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles ClearToolStripMenuItem.Click
+        Dim _textBox As TextBox = getSourceControl(menuItem)
+        _textBox.Text = ""
+    End Sub
+
+    Private Sub btnCopyBirthName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyBirthName.Click
+
+        If txtDesc.SelectionLength > 0 Then
+            Dim name As String = txtDesc.SelectedText
+            Dim names As String() = Split(name, """")
+            If names.Length = 3 Then
+                name = names(0).Trim & " " & names(2).Trim
+            End If
+            txtBirthName.Text = name
+        End If
+    End Sub
+
+    Private Sub btnCopyBirthPlace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyBirthPlace.Click
+        If txtDesc.SelectionLength > 0 Then
+            txtBirthPlace.Text = txtDesc.SelectedText.Trim.TrimEnd(".").TrimEnd(",")
+        End If
+    End Sub
+
+    Private Sub btnClearDesc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearDesc.Click
+        txtDesc.Text = ""
+    End Sub
+
+    Private Sub UseNicknameToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UseNicknameToolStripMenuItem.Click
+        If txtDesc.SelectionLength > 0 Then
+            Dim name As String = txtDesc.SelectedText
+            Dim names As String() = Split(name, """")
+            If names.Length = 3 Then
+                name = names(1).Trim & " " & names(2).Trim
+            End If
+            txtDesc.SelectedText = name
+        End If
+    End Sub
+
+    Private Sub btnTidy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTidy.Click
+        tidyText()
+    End Sub
+
+    Private Sub tidyText()
+        Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c}
+        Dim newText As String = txtDesc.Text.Trim(charsToTrim)
+        Do While newText.Contains("[") And newText.Contains("]")
+            Dim parts1 As String() = Split(newText, "[", 2)
+            Dim parts2 As String() = Split(parts1(1), "]", 2)
+            newText = parts1(0) & parts2(1)
+        Loop
+        txtDesc.Text = newText & If(newText.Length > 0, ".", "")
+        txtName.Text = txtName.Text.Trim(charsToTrim)
+        txtForename.Text = txtForename.Text.Trim(charsToTrim)
+        txtSurname.Text = txtSurname.Text.Trim(charsToTrim)
+        Dim newShortText = txtShortDesc.Text.Trim(charsToTrim)
+        txtShortDesc.Text = newShortText & If(newShortText.Length > 0, ".", "")
+        txtBirthName.Text = txtBirthName.Text.Replace(",", "").Replace(".", "").Replace(";", "").Trim(charsToTrim)
+        txtBirthPlace.Text = txtBirthPlace.Text.Replace(".", "").Replace(";", "").Trim(charsToTrim)
+        txtImgName.Text = txtImgName.Text.Replace("'", "").Trim(charsToTrim)
 
     End Sub
 End Class

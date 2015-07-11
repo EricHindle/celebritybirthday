@@ -2,6 +2,16 @@
 
 Public Class frmSearchDb
 
+    Private _searchName As String
+    Public Property searchName() As String
+        Get
+            Return _searchName
+        End Get
+        Set(ByVal value As String)
+            _searchName = value
+        End Set
+    End Property
+
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         My.Settings.findformpos = setFormPos(Me)
         My.Settings.Save()
@@ -162,7 +172,7 @@ Public Class frmSearchDb
                 .txtYear.Text = sYear
                 .cboDay.SelectedIndex = CInt(sDay) - 1
                 .cboMonth.SelectedIndex = CInt(sMonth) - 1
-                .Button3_Click(sender, e)
+                .btnSplitName_Click(sender, e)
                 .btnMakeImgName_Click(sender, e)
             End With
 
@@ -251,7 +261,6 @@ Public Class frmSearchDb
     End Sub
 
     Private Sub ReCheckToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReCheckToolStripMenuItem.Click
-
         FindinDb()
     End Sub
 
@@ -261,7 +270,12 @@ Public Class frmSearchDb
     End Sub
 
     Private Sub btnWikiFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWikiFind.Click
-        FindinWiki()
+
+        If DataGridView1.SelectedRows.Count > 0 Then
+            _searchName = DataGridView1.SelectedRows(0).Cells("PersonName").Value
+            FindinWiki()
+        End If
+
     End Sub
 
     Private Sub btnDbFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDbFind.Click
@@ -277,15 +291,13 @@ Public Class frmSearchDb
         End If
     End Sub
 
-    Private Sub FindinWiki()
-        If DataGridView1.SelectedRows.Count > 0 Then
-            Dim sSrchname As String = DataGridView1.SelectedRows(0).Cells("PersonName").Value
-            Dim searchstring As String = "http://en.wikipedia.org/w/index.php?search="
-            Dim url As String = searchstring & sSrchname
-            txtURL.Text = url
-            lblNav.Text = "Finding " & sSrchname
-            WebBrowser1.Navigate(url)
-        End If
-
+    Public Sub FindinWiki()
+        Dim searchstring As String = "http://en.wikipedia.org/w/index.php?search="
+        Dim url As String = searchstring & _searchName
+        txtURL.Text = url
+        lblNav.Text = "Finding " & _searchName
+        WebBrowser1.Navigate(url)
     End Sub
+
+
 End Class
