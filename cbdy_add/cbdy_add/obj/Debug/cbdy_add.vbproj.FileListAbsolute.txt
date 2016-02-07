@@ -49,3 +49,5 @@ E:\GitHub\celebritybirthday\cbdy_add\cbdy_add\obj\Debug\cbdy_add.Resources.resou
 E:\GitHub\celebritybirthday\cbdy_add\cbdy_add\obj\Debug\cbdy_add.frmWebImageSearch.resources
 E:\GitHub\celebritybirthday\cbdy_add\cbdy_add\obj\Debug\cbdy_add.frmImageStore.resources
 E:\GitHub\celebritybirthday\cbdy_add\cbdy_add\obj\Debug\cbdy_add.vbproj.GenerateResource.Cache
+F:\CelebrityBirthday\source\celebritybirthday\cbdy_add\cbdy_add\bin\Debug\cbdy_add.exe.config
+F:\CelebrityBirthday\source\celebritybirthday\cbdy_add\cbdy_add\obj\Debug\cbdy_add.xml

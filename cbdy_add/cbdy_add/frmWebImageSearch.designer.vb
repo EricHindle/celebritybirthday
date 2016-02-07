@@ -49,7 +49,7 @@ Partial Class frmWebImageSearch
         Me.WebBrowse.Location = New System.Drawing.Point(2, 1)
         Me.WebBrowse.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowse.Name = "WebBrowse"
-        Me.WebBrowse.Size = New System.Drawing.Size(983, 857)
+        Me.WebBrowse.Size = New System.Drawing.Size(983, 614)
         Me.WebBrowse.TabIndex = 45
         '
         'ContextMenuStrip1
@@ -85,7 +85,7 @@ Partial Class frmWebImageSearch
         '
         Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBack.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBack.Location = New System.Drawing.Point(665, 869)
+        Me.btnBack.Location = New System.Drawing.Point(665, 626)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(48, 22)
         Me.btnBack.TabIndex = 66
@@ -96,7 +96,7 @@ Partial Class frmWebImageSearch
         '
         Me.btnFwd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnFwd.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFwd.Location = New System.Drawing.Point(719, 869)
+        Me.btnFwd.Location = New System.Drawing.Point(719, 626)
         Me.btnFwd.Name = "btnFwd"
         Me.btnFwd.Size = New System.Drawing.Size(47, 22)
         Me.btnFwd.TabIndex = 67
@@ -107,7 +107,7 @@ Partial Class frmWebImageSearch
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(86, 874)
+        Me.Label3.Location = New System.Drawing.Point(86, 631)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 69
@@ -119,7 +119,7 @@ Partial Class frmWebImageSearch
         Me.txtURL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtURL.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtURL.Location = New System.Drawing.Point(2, 871)
+        Me.txtURL.Location = New System.Drawing.Point(2, 628)
         Me.txtURL.Name = "txtURL"
         Me.txtURL.Size = New System.Drawing.Size(603, 20)
         Me.txtURL.TabIndex = 68
@@ -128,7 +128,7 @@ Partial Class frmWebImageSearch
         '
         Me.btnGo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGo.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGo.Location = New System.Drawing.Point(611, 869)
+        Me.btnGo.Location = New System.Drawing.Point(611, 626)
         Me.btnGo.Name = "btnGo"
         Me.btnGo.Size = New System.Drawing.Size(48, 22)
         Me.btnGo.TabIndex = 70
@@ -139,7 +139,7 @@ Partial Class frmWebImageSearch
         '
         Me.btnImages.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnImages.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImages.Location = New System.Drawing.Point(772, 869)
+        Me.btnImages.Location = New System.Drawing.Point(772, 626)
         Me.btnImages.Name = "btnImages"
         Me.btnImages.Size = New System.Drawing.Size(57, 22)
         Me.btnImages.TabIndex = 71
@@ -149,7 +149,7 @@ Partial Class frmWebImageSearch
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(907, 869)
+        Me.Button1.Location = New System.Drawing.Point(907, 626)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(60, 23)
         Me.Button1.TabIndex = 72
@@ -161,7 +161,7 @@ Partial Class frmWebImageSearch
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.OldLace
-        Me.ClientSize = New System.Drawing.Size(988, 903)
+        Me.ClientSize = New System.Drawing.Size(988, 660)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnImages)
         Me.Controls.Add(Me.WebBrowse)

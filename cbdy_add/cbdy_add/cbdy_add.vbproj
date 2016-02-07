@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F03DECC3-889A-4279-A68E-76565F9FD8C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -131,12 +131,15 @@
   <ItemGroup>
     <EmbeddedResource Include="frmImageMaint.resx">
       <DependentUpon>frmImageMaint.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchDb.resx">
       <DependentUpon>frmSearchDb.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -146,9 +149,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmWebImageSearch.resx">
       <DependentUpon>frmWebImageSearch.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImageStore.resx">
       <DependentUpon>frmImageStore.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
