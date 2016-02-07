@@ -1154,4 +1154,10 @@ Public Class frmMain
         txtImgName.Text = txtImgName.Text.Replace("'", "").Trim(charsToTrim)
 
     End Sub
+
+    Private Sub OptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
+        Using _options As New frmOptions
+            _options.ShowDialog()
+        End Using
+    End Sub
 End Class

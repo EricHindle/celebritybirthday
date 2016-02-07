@@ -117,6 +117,7 @@ Partial Class frmMain
         Me.btnCopyBirthName = New System.Windows.Forms.Button
         Me.btnClearDesc = New System.Windows.Forms.Button
         Me.btnTidy = New System.Windows.Forms.Button
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -650,9 +651,7 @@ Partial Class frmMain
         '
         Me.StatusStrip1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 943)
-
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 16, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1034, 22)
@@ -771,7 +770,7 @@ Partial Class frmMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ImagesToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ImagesToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1034, 24)
@@ -782,7 +781,7 @@ Partial Class frmMain
         '
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FindPeopleToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(52, 20)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(54, 20)
         Me.ToolStripMenuItem1.Text = "Search"
         '
         'FindPeopleToolStripMenuItem
@@ -805,7 +804,7 @@ Partial Class frmMain
         'ImagesToolStripMenuItem
         '
         Me.ImagesToolStripMenuItem.Name = "ImagesToolStripMenuItem"
-        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
+        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.ImagesToolStripMenuItem.Text = "Images"
         '
         'btnLoadUpd
@@ -872,7 +871,6 @@ Partial Class frmMain
         Me.cbDateAmend.Text = "Date amended"
         Me.cbDateAmend.UseVisualStyleBackColor = True
         '
-
         'txtLoadDay
         '
         Me.txtLoadDay.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1013,14 +1011,18 @@ Partial Class frmMain
         Me.btnTidy.TabIndex = 73
         Me.btnTidy.Text = "Tidy"
         Me.btnTidy.UseVisualStyleBackColor = True
-
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Text = "Options"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.OldLace
-
         Me.ClientSize = New System.Drawing.Size(1034, 965)
         Me.Controls.Add(Me.btnClearDesc)
         Me.Controls.Add(Me.btnCopyBirthName)
@@ -1036,7 +1038,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.txtDthDay)
         Me.Controls.Add(Me.btnSaveImgInfo)
         Me.Controls.Add(Me.txtLoadDay)
-
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.btnCreateFullName)
         Me.Controls.Add(Me.cbDateAmend)
@@ -1206,6 +1207,7 @@ Partial Class frmMain
     Friend WithEvents UseNicknameToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnTidy As System.Windows.Forms.Button
+    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 End Class
