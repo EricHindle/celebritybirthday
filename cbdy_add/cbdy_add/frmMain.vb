@@ -1122,14 +1122,19 @@ Public Class frmMain
 
     Private Sub UseNicknameToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UseNicknameToolStripMenuItem.Click
         If txtDesc.SelectionLength > 0 Then
-            Dim name As String = txtDesc.SelectedText
-            Dim names As String() = Split(name, """")
-            If names.Length = 3 Then
-                name = names(1).Trim & " " & names(2).Trim
-            End If
-            txtDesc.SelectedText = name
+            txtDesc.SelectedText = getNickname(txtDesc.SelectedText)
         End If
     End Sub
+
+    Private Function getNickname(ByRef sName As String) As String
+        Dim names As String() = Split(sName, """")
+        Dim sNickName As String = ""
+        If names.Length > 2 Then
+            sNickName = names(1).Trim & " " & names(2).Trim
+            sName = names(0).Trim & " " & names(2).Trim
+        End If
+        Return sNickName & " "
+    End Function
 
     Private Sub btnTidy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTidy.Click
         tidyText()
@@ -1137,12 +1142,36 @@ Public Class frmMain
 
     Private Sub tidyText()
         Dim charsToTrim() As Char = {" "c, ","c, ";"c, "."c}
-        Dim newText As String = txtDesc.Text.Trim(charsToTrim)
+        Dim newText As String = txtDesc.Text.Trim(charsToTrim).Replace("–", "-").Replace(Chr(147), """").Replace(Chr(148), """")
         Do While newText.Contains("[") And newText.Contains("]")
             Dim parts1 As String() = Split(newText, "[", 2)
             Dim parts2 As String() = Split(parts1(1), "]", 2)
             newText = parts1(0) & parts2(1)
         Loop
+
+        Dim s1 As String() = Split(newText, " - ")
+
+        If s1.Count > 1 Then
+            Dim s2 As String() = Split(s1(1), ")")
+            If s2.Count > 1 Then
+                If IsDate(s2(0)) Then
+                    Dim d1 As Date = CDate(s2(0))
+                    txtDthDay.Text = Format(d1, "dd")
+                    txtDthMth.Text = Format(d1, "MM")
+                End If
+            End If
+        End If
+
+        Dim s3 As String() = Split(newText, "(")
+        If s3.Count > 1 Then
+            If s3(0).IndexOf("""") > 0 Then
+                Dim birthName As String = s3(0)
+                s3(0) = getNickname(birthName)
+                txtBirthName.Text = birthName
+                newText = Join(s3, "(")
+            End If
+        End If
+
         txtDesc.Text = newText & If(newText.Length > 0, ".", "")
         txtName.Text = txtName.Text.Trim(charsToTrim)
         txtForename.Text = txtForename.Text.Trim(charsToTrim)
@@ -1152,7 +1181,6 @@ Public Class frmMain
         txtBirthName.Text = txtBirthName.Text.Replace(",", "").Replace(".", "").Replace(";", "").Trim(charsToTrim)
         txtBirthPlace.Text = txtBirthPlace.Text.Replace(".", "").Replace(";", "").Trim(charsToTrim)
         txtImgName.Text = txtImgName.Text.Replace("'", "").Trim(charsToTrim)
-
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
