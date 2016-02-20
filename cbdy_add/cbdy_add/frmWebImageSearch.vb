@@ -72,4 +72,9 @@ Public Class frmWebImageSearch
         My.Settings.imgbrowsepos = setFormPos(Me)
         My.Settings.Save()
     End Sub
+
+    Private Sub WebBrowse_NewWindow(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WebBrowse.NewWindow
+        e.Cancel = True
+        WebBrowse.Navigate(WebBrowse.StatusText)
+    End Sub
 End Class

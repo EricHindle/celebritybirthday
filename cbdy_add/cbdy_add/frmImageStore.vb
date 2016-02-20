@@ -223,4 +223,9 @@ Public Class frmImageStore
         My.Settings.imgselectpos = setFormPos(Me)
         My.Settings.Save()
     End Sub
+
+    Private Sub PicBrowser_NewWindow(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles PicBrowser.NewWindow
+        e.Cancel = True
+        PicBrowser.Navigate(PicBrowser.StatusText)
+    End Sub
 End Class

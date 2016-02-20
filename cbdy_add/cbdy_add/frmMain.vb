@@ -1158,6 +1158,7 @@ Public Class frmMain
                     Dim d1 As Date = CDate(s2(0))
                     txtDthDay.Text = Format(d1, "dd")
                     txtDthMth.Text = Format(d1, "MM")
+                    txtDied.Text = Format(d1, "yyyy")
                 End If
             End If
         End If
