@@ -927,9 +927,9 @@ Public Class frmMain
         Dim sUrl As String = "http://images.google.co.uk/images?q=" & txtName.Text.Replace(" ", "+")
         oWebBrowser.txtURL.Text = sUrl
         oWebBrowser.CurrentName = txtName.Text
-        oWebBrowser.WebBrowse.Navigate(sUrl)
         oWebBrowser.Show()
         oWebBrowser.BringToFront()
+        Process.Start(sUrl)
     End Sub
 
     Private Function checkForChanges() As Boolean
